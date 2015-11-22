@@ -21,7 +21,10 @@ public:
     QString ReadFromFile();
 
 private:
-    void OpenFile();
+    void OpenFileForRead();
+    void OpenFileForWrite();
+    void OpenFileForAppend();
+    void OpenFileForReadWrite();
 
     QFile *mFile;
 

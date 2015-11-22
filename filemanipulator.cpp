@@ -18,7 +18,7 @@ void FileManipulator::WriteToFile(QString dataToWrite)
 
     QTextStream writeStreamer(mFile);
 
-    OpenFile();
+    OpenFileForWrite();
 
     writeStreamer << dataToWrite;
 
@@ -28,7 +28,14 @@ void FileManipulator::WriteToFile(QString dataToWrite)
 
 void FileManipulator::Append(QString dataToWrite)
 {
+    QTextStream appendStreamer(mFile);
 
+    OpenFileForAppend();
+
+    appendStreamer << dataToWrite;
+
+    mFile->flush();
+    mFile->close();
 }
 
 QString FileManipulator::ReadFromFile()
@@ -37,7 +44,7 @@ QString FileManipulator::ReadFromFile()
 
     QString RxData = "";
 
-    OpenFile();
+    OpenFileForRead();
 
     RxData = readStreamer.readAll();
 
@@ -46,7 +53,34 @@ QString FileManipulator::ReadFromFile()
     return RxData;
 }
 
-void FileManipulator::OpenFile()
+void FileManipulator::OpenFileForRead()
+{
+    if(!mFile->open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        qDebug() << "Couldn`t open the file";   // replace with messagebox
+        return;
+    }
+}
+
+void FileManipulator::OpenFileForWrite()
+{
+    if(!mFile->open(QIODevice::WriteOnly | QIODevice::Text))
+    {
+        qDebug() << "Couldn`t open the file";   // replace with messagebox
+        return;
+    }
+}
+
+void FileManipulator::OpenFileForAppend()
+{
+    if(!mFile->open(QIODevice::Append | QIODevice::Text))
+    {
+        qDebug() << "Couldn`t open the file";   // replace with messagebox
+        return;
+    }
+}
+
+void FileManipulator::OpenFileForReadWrite()
 {
     if(!mFile->open(QIODevice::ReadWrite | QIODevice::Text))
     {

@@ -15,9 +15,14 @@ int main(int argc, char *argv[])
 
     FileManipulator *myFile = new FileManipulator(string);
 
-    QString data = "hello,world,salutare,romani;";
+    QString data = "hello,world,salutare,romani;\n";
 
     myFile->WriteToFile(data);
+
+    myFile->Append(data);
+    myFile->Append(data);
+    myFile->Append(data);
+    myFile->Append(data);
 
     QString rxData = myFile->ReadFromFile();
 
@@ -25,6 +30,7 @@ int main(int argc, char *argv[])
 
     qDebug() << rxData;
 
-    return a.exec();
+    return 0;
+    //return a.exec();
 }
 
