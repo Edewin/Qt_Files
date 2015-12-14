@@ -11,7 +11,12 @@ int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
-    QString string = "/home/edutzu/Desktop/test.csv";
+    // Linux String
+    //QString string = "/home/edutzu/Desktop/test.csv";
+    // Windows String
+    QString string = QDir::currentPath() + "/test.csv";
+
+    qDebug() << string;
 
     FileManipulator *myFile = new FileManipulator(string);
 
@@ -19,14 +24,13 @@ int main(int argc, char *argv[])
 
     myFile->WriteToFile(data);
 
-    myFile->Append(data);
-    myFile->Append(data);
-    myFile->Append(data);
-    myFile->Append(data);
+
+    for (int var = 0; var < 1000; ++var) {
+        myFile->Append(data);
+    }
+
 
     QString rxData = myFile->ReadFromFile();
-
-   // myFile->ReadFromFile(rxData);
 
     qDebug() << rxData;
 

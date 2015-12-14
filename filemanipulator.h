@@ -12,20 +12,21 @@
 class FileManipulator
 {
 public:
-    explicit FileManipulator(QString filename);
+    explicit FileManipulator(const QString filename);
 
     ~FileManipulator();
 
-    void WriteToFile(QString dataToWrite);
-    void Append(QString dataToWrite);
+    void WriteToFile(const QString dataToWrite);
+    void Append(const QString dataToWrite);
     QString ReadFromFile();
 
-private:
+protected:
     void OpenFileForRead();
     void OpenFileForWrite();
     void OpenFileForAppend();
     void OpenFileForReadWrite();
 
+private:
     QFile *mFile;
 
 signals:

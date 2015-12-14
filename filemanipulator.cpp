@@ -1,7 +1,7 @@
 #include "filemanipulator.h"
 
 
-FileManipulator::FileManipulator(QString filename)
+FileManipulator::FileManipulator(const QString filename)
 {
     mFile = new QFile(filename);
 }
@@ -13,7 +13,7 @@ FileManipulator::~FileManipulator()
 
 
 
-void FileManipulator::WriteToFile(QString dataToWrite)
+void FileManipulator::WriteToFile(const QString dataToWrite)
 {
 
     QTextStream writeStreamer(mFile);
@@ -26,7 +26,7 @@ void FileManipulator::WriteToFile(QString dataToWrite)
     mFile->close();
 }
 
-void FileManipulator::Append(QString dataToWrite)
+void FileManipulator::Append(const QString dataToWrite)
 {
     QTextStream appendStreamer(mFile);
 
